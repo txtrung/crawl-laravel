@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
             '*.image_url' => 'required',
             '*.name' => 'required',
             '*.size_available' => 'required',
-            '*.other_image_url' => 'required'
+            '*.other_images_url' => 'required'
         ];
     }
 }

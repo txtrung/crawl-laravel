@@ -66,13 +66,13 @@
 
                         <!-- Other Image -->
                         <div class="mt-4">
-                            <label class="block text-sm font-medium text-gray-700" for="other_image_url">
+                            <label class="block text-sm font-medium text-gray-700" for="other_images_url">
                                 Other Image
                             </label>
-                            <textarea name="other_image_url"
+                            <textarea name="other_images_url"
                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm placeholder:text-gray-400 placeholder:text-right focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                rows="4" placeholder="400"> {{old('other_image_url',$product->other_image_url)}}</textarea>
-                            @error('other_image_url')
+                                rows="4" placeholder="400"> {{old('other_images_url',$product->other_images_url)}}</textarea>
+                            @error('other_images_url')
                             <span class="text-red-600 text-sm">
                                 {{ $message }}
                             </span>

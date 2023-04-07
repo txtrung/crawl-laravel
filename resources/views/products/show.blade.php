@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Other image:</strong>
-                {{ $product->other_image_url }}
+                {{ $product->other_images_url }}
             </div>
         </div>
     </div>

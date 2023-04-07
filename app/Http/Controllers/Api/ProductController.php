@@ -51,14 +51,14 @@ class ProductController extends BaseController
 
         $createdProducts = 0;
         foreach($products as $key => $product) {
-            if (empty($product['name']) || empty($product['image_url']) || empty($product['size_available']) || empty($product['other_image_url'])) {
+            if (empty($product['name']) || empty($product['image_url']) || empty($product['size_available']) || empty($product['other_images_url'])) {
                 continue;
             }
             $data = [];
             $data['name'] = $product['name'];
             $data['image_url'] = $product['image_url'];
             $data['size_available'] = $product['size_available'];
-            $data['other_image_url'] = json_encode($product['other_image_url'],JSON_UNESCAPED_SLASHES);
+            $data['other_images_url'] = json_encode($product['other_images_url'],JSON_UNESCAPED_SLASHES);
 
             $createdProducts++;
             Product::create($data);

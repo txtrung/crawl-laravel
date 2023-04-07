@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->json('other_image_url')->change();
+            $table->json('other_images_url')->change();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->text('other_image_url')->change();
+            $table->text('other_images_url')->change();
         });
     }
 };

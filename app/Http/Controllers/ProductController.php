@@ -18,9 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $dir = '127.0.0.1:3131';
         $products = Product::paginate(10);
       
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products'))->with('dir',$dir);
     }
 
     /**
@@ -45,7 +46,7 @@ class ProductController extends Controller
             'image_url' => 'required',
             'name' => 'required',
             'size_available' => 'required',
-            'other_image_url' => 'required',
+            'other_images_url' => 'required',
         ]);
       
         Product::create($request->all());
@@ -89,7 +90,7 @@ class ProductController extends Controller
             'image_url' => 'required',
             'name' => 'required',
             'size_available' => 'required',
-            'other_image_url' => 'required',
+            'other_images_url' => 'required',
         ]);
       
         $product->update($request->all());
@@ -136,7 +137,7 @@ class ProductController extends Controller
         DB::table('products')->orderBy('id')->chunk(120, function ($products) use($woocommerce) {
             foreach ($products as $product) {
                 $images = [];
-                foreach (json_decode($product->other_image_url) as $image) {
+                foreach (json_decode($product->other_images_url) as $image) {
                     array_push($images, [
                         "src" => $image
                     ]);

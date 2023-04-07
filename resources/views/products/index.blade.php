@@ -91,7 +91,8 @@
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">
-                                        {{ $product->image_url }}
+                                        <!-- {{ $product->image_url }} -->
+                                        <img src="{{$product->image_url}}" class="img-thumbnail" alt="Responsive image">
                                     </div>
                                 </td>
 
@@ -107,7 +108,9 @@
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">
-                                        {{ $product->other_image_url }}
+                                        @foreach (json_decode($product->other_images_url) as $image)
+                                            <img src="{{ $dir .'\\'. $image}}" class="img-thumbnail" alt="Responsive image">
+                                        @endforeach
                                     </div>
                                 </td>
 
