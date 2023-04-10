@@ -18,10 +18,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $dir = '127.0.0.1:3131';
         $products = Product::paginate(10);
       
-        return view('products.index',compact('products'))->with('dir',$dir);
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -124,10 +123,15 @@ class ProductController extends Controller
         $site = $request->input('site');
         $woocommerce = new Client(
             $site,
-            'ck_42b2dcef4556386b591e23a9c74bdb76fae11f2c',
-            'cs_ffcb777f77784fe325677c833cd641a00370e5e4',
+            // home
+            // 'ck_42b2dcef4556386b591e23a9c74bdb76fae11f2c',
+            // 'cs_ffcb777f77784fe325677c833cd641a00370e5e4',
+            // cty
+            'ck_dadd50edabe626323865fa7bd64b80f95110570a',
+            'cs_98f40fdb5f461438201b1a2e74f6ee0faca5b23e',
             [
               'version' => 'wc/v3',
+              'query_string_auth' => 'true'
             ]
           );
         $woocommerce->http->setCustomCurlOptions([CURLOPT_TIMEOUT => 0]);
@@ -136,7 +140,7 @@ class ProductController extends Controller
         $chunkItems = [];
         DB::table('products')->orderBy('id')->chunk(120, function ($products) use($woocommerce) {
             foreach ($products as $product) {
-                $images = [];
+                $images = [["src" => $product->image_url]];
                 foreach (json_decode($product->other_images_url) as $image) {
                     array_push($images, [
                         "src" => $image
@@ -205,13 +209,15 @@ class ProductController extends Controller
                   print_r($lastResponse->getHeaders(), true) .
                   '</code><pre>'; // Response headers (array).
                 echo '<pre><code>' . print_r($lastResponse->getBody(), true) . '</code><pre>'; // Response body (JSON).
+                // die('1');
               } catch (HttpClientException $e) {
                 echo '<pre><code>' . print_r($e->getMessage(), true) . '</code><pre>'; // Error message.
                 echo '<pre><code>' . print_r($e->getRequest(), true) . '</code><pre>'; // Last request data.
                 echo '<pre><code>' . print_r($e->getResponse(), true) . '</code><pre>'; // Last response data.
+                // die('2');
               }
 
-
+            // die('1');
             return false;
         });
 
